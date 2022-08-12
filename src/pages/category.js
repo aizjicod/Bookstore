@@ -2,6 +2,6 @@ const Category = () => (
   <button type="button">
     Check status
   </button>
-)
+);
 
-export default Category
+export default Category;
