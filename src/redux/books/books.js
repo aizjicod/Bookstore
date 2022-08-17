@@ -11,7 +11,34 @@ export const removeBookAction = (id) => ({
   id,
 });
 
-const bookReducer = (state = [], action) => {
+const initialState = [
+  {
+    id: '0',
+    title: 'book 1',
+    author: 'author 1',
+    genre: 'action',
+    progress: 68,
+    chapter: 18,
+  },
+  {
+    id: '1',
+    title: 'book 2',
+    author: 'author 2',
+    genre: 'fantasy',
+    progress: 100,
+    chapter: 0,
+  },
+  {
+    id: '2',
+    title: 'book 3',
+    author: 'author 3',
+    genre: 'romance',
+    progress: 0,
+    chapter: 'prologue',
+  },
+];
+
+const bookReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_BOOK:
       return [
@@ -19,8 +46,7 @@ const bookReducer = (state = [], action) => {
         action.book,
       ];
     case REMOVE_BOOK:
-      return state.map((book) => (book.id === action.id
-        ? book : null));
+      return state.filter((book) => book.id !== action.id);
     default:
       return state;
   }
