@@ -1,13 +1,13 @@
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { removeBookAction } from '../redux/books/books';
+import { deleteBookApi } from '../redux/books/books';
 
 const BookInformation = ({
   genre, title, author, id,
 }) => {
   const dispatch = useDispatch();
   const handleOnClick = () => {
-    dispatch(removeBookAction(id));
+    dispatch(deleteBookApi(id));
   };
 
   return (
