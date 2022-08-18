@@ -1,28 +1,34 @@
-import { useSelector } from 'react-redux/es/exports';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux/es/exports';
 import AddNewBook from '../components/addnewbooks';
 import BookProgress from '../components/bookCompleted';
 import BookInformation from '../components/bookInformation';
 import BookChapter from '../components/booksChapter';
+import { getBooksDataAPI } from '../redux/books/books';
 
 const Books = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getBooksDataAPI());
+  }, []);
   const booksData = useSelector((state) => state.books);
   return (
     <>
       <ul>
         {booksData.map((bookData) => (
-          <li key={bookData.id}>
+          <li key={bookData.item_id}>
             <BookInformation
               title={bookData.title}
               author={bookData.author}
-              genre={bookData.genre}
-              id={bookData.id}
+              genre={bookData.category}
+              id={bookData.item_id}
             />
-            <BookProgress progress={bookData.progress} />
-            <BookChapter chapter={bookData.chapter} />
+            <BookProgress />
+            <BookChapter />
           </li>
         ))}
       </ul>
-      <AddNewBook booksData={booksData} />
+      <AddNewBook />
     </>
   );
 };

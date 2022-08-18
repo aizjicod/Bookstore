@@ -1,10 +1,56 @@
+import apiService from '../../api/api';
+
 const ADD_BOOK = 'Bookstore/books/ADD_BOOK';
 const REMOVE_BOOK = 'Bookstore/books/REMOVE_BOOK';
+const GET_BOOKS_DATA = 'Bookstore/books/GET_BOOK_DATA';
 
-export const addBookAction = (book) => ({
-  type: ADD_BOOK,
-  book,
-});
+export const addNewBookApi = (bookData) => async (dispatch) => {
+  try {
+    const res = await apiService.create(bookData);
+    dispatch({
+      type: ADD_BOOK,
+      book: bookData,
+    });
+    return Promise.resolve(res.data);
+  } catch (err) {
+    return Promise.reject(err);
+  }
+};
+
+export const getBooksDataAPI = () => async (dispatch) => {
+  try {
+    const res = await apiService.getAll();
+    const { data } = res;
+    const books = [];
+    Object.keys(data).forEach((e) => {
+      books.push({ ...data[e][0], item_id: e });
+    });
+    dispatch({
+      type: GET_BOOKS_DATA,
+      booksData: books,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const deleteBookApi = (id) => async (dispatch) => {
+  try {
+    await apiService.remove(id);
+    const res = await apiService.getAll();
+    const { data } = res;
+    const books = [];
+    Object.keys(data).forEach((e) => {
+      books.push({ ...data[e][0], item_id: e });
+    });
+    dispatch({
+      type: REMOVE_BOOK,
+      data: books,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 export const removeBookAction = (id) => ({
   type: REMOVE_BOOK,
@@ -13,40 +59,36 @@ export const removeBookAction = (id) => ({
 
 const initialState = [
   {
-    id: '0',
-    title: 'book 1',
-    author: 'author 1',
-    genre: 'action',
-    progress: 68,
-    chapter: 18,
+    category: 'Fiction',
+    author: 'John Smith',
+    title: 'The Great Gatsby',
+    item_id: 'item1',
   },
   {
-    id: '1',
-    title: 'book 2',
-    author: 'author 2',
-    genre: 'fantasy',
-    progress: 100,
-    chapter: 0,
+    category: 'Fiction',
+    author: 'John Smith',
+    title: 'The Great Gatsby',
+    item_id: 'item2',
   },
   {
-    id: '2',
-    title: 'book 3',
-    author: 'author 3',
-    genre: 'romance',
-    progress: 0,
-    chapter: 'prologue',
+    category: 'Fiction',
+    author: 'John Smith',
+    title: 'The Great Gatsby',
+    item_id: 'item3',
   },
 ];
 
 const bookReducer = (state = initialState, action) => {
   switch (action.type) {
+    case GET_BOOKS_DATA:
+      return action.booksData;
     case ADD_BOOK:
       return [
         ...state,
         action.book,
       ];
     case REMOVE_BOOK:
-      return state.filter((book) => book.id !== action.id);
+      return [...action.data];
     default:
       return state;
   }
