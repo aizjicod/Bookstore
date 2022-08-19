@@ -2,3 +2,13 @@
   margin: 0;
   padding: 0;
 }
+
+body {
+  display: flex;
+  justify-content: center;
+  background: #f5f6fa;
+}
+
+#root {
+  width: 100%;
+}

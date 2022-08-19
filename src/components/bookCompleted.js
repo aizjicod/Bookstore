@@ -1,9 +1,25 @@
-const BookProgress = () => (
-  <div className="book-progress">
-    <input type="range" max="100" min="0" value="0" className="progress-range" readOnly />
-    <h2 className="progress-h2">0</h2>
-    <p className="progress-text">completed</p>
-  </div>
-);
+const BookProgress = () => {
+  const porcentage = 30;
+  const degValue = (180 / 100) * porcentage;
+  console.log(porcentage);
+  return (
+    <div className="book-progress">
+      <div className="circle-wrap">
+        <div className="circle">
+          <div className="mask full">
+            <div className="fill" style={{ transform: `rotate(${degValue}deg)` }} />
+          </div>
+          <div className="mask half" style={{ transform: `rotate(${degValue}deg)` }}>
+            <div className="fill" style={{ transform: `rotate(${degValue}deg)` }} />
+          </div>
+          <div className="inside-circle progress-h2">
+            {porcentage}
+            %
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default BookProgress;

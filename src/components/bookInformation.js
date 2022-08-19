@@ -16,7 +16,7 @@ const BookInformation = ({
         <p className="book-genre">{genre}</p>
         <h2 className="book-title">{title}</h2>
         <p className="book-author">{author}</p>
-        <div>
+        <div className="buttons-div">
           <button type="button" className="book-btns">Comments</button>
           <button type="button" className="book-btns" onClick={handleOnClick}>Remove</button>
           <button type="button" className="book-btns">Edit</button>

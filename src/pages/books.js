@@ -14,7 +14,7 @@ const Books = () => {
   const booksData = useSelector((state) => state.books);
   return (
     <>
-      <ul>
+      <ul className="books-list">
         {booksData.map((bookData) => (
           <li key={bookData.item_id}>
             <BookInformation
