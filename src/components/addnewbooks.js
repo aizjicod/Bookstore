@@ -38,14 +38,14 @@ const AddNewBook = () => {
   };
 
   return (
-    <>
+    <div className="add-book-section">
       <h2>Add New Book</h2>
-      <form onSubmit={handleOnSubmit}>
+      <form onSubmit={handleOnSubmit} id="form">
         <input type="text" name="name" onChange={handleOnChange} placeholder="enter new book" className="name-input" />
         <input type="text" name="author" onChange={handleOnChange} placeholder="enter the author" className="author-input" />
-        <input type="submit" value="add new book" />
+        <input type="submit" value="add new book" className="input-submit" />
       </form>
-    </>
+    </div>
   );
 };
 

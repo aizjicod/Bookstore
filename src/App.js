@@ -1,15 +1,18 @@
 import { Link, Route, Routes } from 'react-router-dom';
 import Books from './pages/books';
 import Category from './pages/category';
+import './css/app.css';
 
 function App() {
   return (
     <div className="App">
-      <header>
-        Book&apos;s store
-        <nav>
-          <Link to="/">Books</Link>
-          <Link to="Category">Category</Link>
+      <header id="header">
+        <h1 className="Bookstore-CMS">
+          Book&apos;s store
+        </h1>
+        <nav className="navbar">
+          <Link to="/" className="navbar-links">Books</Link>
+          <Link to="Category" className="navbar-links">Category</Link>
         </nav>
       </header>
 
